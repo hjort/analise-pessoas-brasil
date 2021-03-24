@@ -1,6 +1,8 @@
 mkdir origem
 cd origem
 
+wget http://www.portaltransparencia.gov.br/download-de-dados/servidores/202012_Servidores -O 202012_Servidores.zip
+
 unzip 202012_Servidores.zip
 
 file *.csv
