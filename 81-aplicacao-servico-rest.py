@@ -15,12 +15,16 @@ deactivate
 rmvirtualenv mysite2
 '''
 
+#curl 'http://localhost:5000/prever' -H 'Content-Type: application/json' -d '{"nome":"Leonor"}'
+#curl 'http://hjort.pythonanywhere.com/prever' -H 'Content-Type: application/json' -d '{"nome":"Djalma"}'
+
 from platform import python_version
 print('Python Versão:', python_version())
 
 import re
 import numpy as np
 from flask import Flask, request, jsonify, render_template
+from json import loads, dumps
 from joblib import load
 
 def obter_primeiro_nome(str):
@@ -44,7 +48,6 @@ app = Flask(__name__)
 @app.before_first_request
 def carregar_modelo():
     app.preditor = load('./modelos/modelo-genero-nome-RF.joblib.bz2')
-    #app.preditor = load('./modelos/modelo-genero-nome-XGB-nomes-pf.joblib.bz2')
     
 @app.route("/")
 def index():
@@ -52,7 +55,20 @@ def index():
 
 @app.route('/prever', methods = ['POST'])
 def prever():
-    nome = request.form['nome']
+
+    # receber requisições JSON ou HTML
+    is_api = False
+    if (request.content_type.startswith('application/json')):
+        is_api = True
+        data = request.get_data()
+        dados = loads(data.decode("utf-8"))
+        nome = dados['nome']
+#        return json.loads(data.decode("utf-8"))
+#        return dumps(loads(data))
+#        return data
+    else:
+        nome = request.form['nome']
+
     print("=> nome:", nome)
 
     # extrair primeiro nome e obter array de letras invertido
@@ -71,7 +87,12 @@ def prever():
     else:
         genero = ''
 
-    return render_template('index.html', previsao = genero)
+    # responder requisições via API REST (JSON) ou HTML
+    if is_api:
+        dados['genero'] = genero
+        return jsonify(dados)
+    else:
+        return render_template('index.html', previsao = genero)
 
 def main():
     app.run(host = '0.0.0.0', port = 5000, debug = False)  
