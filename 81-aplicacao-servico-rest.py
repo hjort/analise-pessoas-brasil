@@ -6,9 +6,26 @@
 from platform import python_version
 print('Python Versão:', python_version())
 
+import re
 import numpy as np
 from flask import Flask, request, jsonify, render_template
 from joblib import load
+
+def obter_primeiro_nome(str):
+    if str:
+        return re.split("\s", str)[0].upper()
+
+MAIOR_QTDE_LETRAS = 16
+
+def obter_array_letras(str):
+    if not str:
+        return None
+    rev = str[::-1]
+    anome = []
+    for i in range(MAIOR_QTDE_LETRAS):
+        x = ord(rev[i]) - 64 if len(rev) > i else 0
+        anome.append(x)
+    return anome
 
 app = Flask(__name__)
 
@@ -22,12 +39,17 @@ def index():
 
 @app.route('/prever', methods = ['POST'])
 def prever():
-    dados = request.form['nome']
+    nome = request.form['nome']
+    print("=> nome:", nome)
 
-    tipo = dados
+    # extrair primeiro nome e obter array de letras invertido
+    anome = obter_array_letras(obter_primeiro_nome(nome))
 
-#    data = np.array([np.asarray(data, dtype = float)])
-#    predictions = app.predictor.predict(data)
+    # prever o gênero a partir do nome
+    if anome:
+        tipo = app.preditor.predict(np.asarray([anome]))[0]
+    else:
+        tipo = None
 
     if tipo == 0:
         genero = 'FEMININO'
