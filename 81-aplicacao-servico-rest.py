@@ -3,11 +3,15 @@
 
 # Aplicação Web e API REST
 
+# http://hjort.pythonanywhere.com/
 # https://medium.com/@kaustuv.kunal/how-to-deploy-and-host-machine-learning-model-de8cfe4de9c5
+# https://help.pythonanywhere.com/pages/Virtualenvs/
 '''
 mkvirtualenv --python=/usr/bin/python3.8 mysite2
+workon mysite2
+#source ~/.virtualenvs/mysite2/bin/activate
+which python
 deactivate
-source ~/.virtualenvs/mysite2/bin/activate
 rmvirtualenv mysite2
 '''
 
@@ -39,7 +43,8 @@ app = Flask(__name__)
 
 @app.before_first_request
 def carregar_modelo():
-    app.preditor = load('./modelos/modelo-genero-nome-XGB-nomes-pf.joblib.bz2')
+    app.preditor = load('./modelos/modelo-genero-nome-RF.joblib.bz2')
+    #app.preditor = load('./modelos/modelo-genero-nome-XGB-nomes-pf.joblib.bz2')
     
 @app.route("/")
 def index():
