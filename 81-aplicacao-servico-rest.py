@@ -3,6 +3,14 @@
 
 # Aplicação Web e API REST
 
+# https://medium.com/@kaustuv.kunal/how-to-deploy-and-host-machine-learning-model-de8cfe4de9c5
+'''
+mkvirtualenv --python=/usr/bin/python3.8 mysite2
+deactivate
+source ~/.virtualenvs/mysite2/bin/activate
+rmvirtualenv mysite2
+'''
+
 from platform import python_version
 print('Python Versão:', python_version())
 
