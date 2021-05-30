@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block head%}
+{% endblock %}
+{% block body %}
+<div>
+    <h1>Previsão de gênero</h1>
+    <form action="/prever" method="POST">
+        <div>
+            <p>NOME:</p>
+            <input type="text" name="nome" id="nome">
+        </div>
+        <input type="submit" value="Prever">
+    </form>
+    <h2>Gênero: {{previsao}}</h2>
+</div>
+{% endblock %}
