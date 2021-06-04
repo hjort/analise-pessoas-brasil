@@ -2,7 +2,7 @@
 #sudo docker ps
 
 # rodar em modo interativo
-sudo docker run -it -p 80:5000 appweb
+#sudo docker run --name app-pessoas -it -p 80:5000 app-pessoas
 
 # rodar em modo daemon
-#sudo docker run -d -p 80:5000 appweb
+sudo docker run --name app-pessoas -d -p 80:5000 app-pessoas
