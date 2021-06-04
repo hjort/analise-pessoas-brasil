@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.github.hjort.analisepessoasbrasil.generonome";
+option java_outer_classname = "GeneroNomeProto";
+option objc_class_prefix = "HLW";
+
+package generonome;
+
+service GeneroNomePreditor {
+  rpc PreverGeneroNome (GeneroNomeRequest) returns (GeneroNomeReply) {}
+}
+
+message GeneroNomeRequest {
+  string nome = 1;
+}
+
+message GeneroNomeReply {
+  int32 genero = 1;
+}
+
