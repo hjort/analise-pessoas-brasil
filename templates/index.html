@@ -6,11 +6,23 @@
     <h1>Previsão de gênero</h1>
     <form action="/prever" method="POST">
         <div>
-            <p>NOME:</p>
+            <p>NOME DE PESSOA FÍSICA:</p>
             <input type="text" name="nome" id="nome">
         </div>
         <input type="submit" value="Prever">
     </form>
     <h2>Gênero: {{previsao}}</h2>
+
+    <hr/>
+    <h3>Chamada de serviço via API REST:</h3>
+    <p>
+    <pre>$ curl 'http://hjort.pythonanywhere.com/prever' \
+    -H 'Content-Type: application/json' \
+    -d '{"nome":"Leonor"}'</pre>
+    </p>
+    <h3>Código no GitHub:</h3>
+    <p>
+        <a href="https://github.com/hjort/analise-pessoas-brasil" target="_new">https://github.com/hjort/analise-pessoas-brasil</a>
+    </p>
 </div>
 {% endblock %}
