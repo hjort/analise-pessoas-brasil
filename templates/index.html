@@ -16,9 +16,9 @@
     <hr/>
     <h3>Chamada de serviço via API REST:</h3>
     <p>
-    <pre>$ curl 'http://hjort.pythonanywhere.com/prever' \
-    -H 'Content-Type: application/json' \
-    -d '{"nome":"Leonor"}'</pre>
+    <pre>$ curl "http://{{request.host}}/prever" \
+    -H "Content-Type: application/json" \
+    -d "{\"nome\":\"Leonor\"}"</pre>
     </p>
     <h3>Código no GitHub:</h3>
     <p>

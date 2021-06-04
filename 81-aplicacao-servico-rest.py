@@ -56,6 +56,9 @@ def index():
 @app.route('/prever', methods = ['POST'])
 def prever():
 
+    #print("flask.request.host:", request.host)
+    #print("flask.request.host_url:", request.host_url)
+
     # receber requisições JSON ou HTML
     is_api = False
     if (request.content_type.startswith('application/json')):
