@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from grpc import genero_nome_pb2 as grpc_dot_genero__nome__pb2
+import genero_nome_pb2 as genero__nome__pb2
 
 
 class GeneroNomePreditorStub(object):
@@ -16,8 +16,8 @@ class GeneroNomePreditorStub(object):
         """
         self.PreverGeneroNome = channel.unary_unary(
                 '/generonome.GeneroNomePreditor/PreverGeneroNome',
-                request_serializer=grpc_dot_genero__nome__pb2.GeneroNomeRequest.SerializeToString,
-                response_deserializer=grpc_dot_genero__nome__pb2.GeneroNomeReply.FromString,
+                request_serializer=genero__nome__pb2.GeneroNomeRequest.SerializeToString,
+                response_deserializer=genero__nome__pb2.GeneroNomeReply.FromString,
                 )
 
 
@@ -35,8 +35,8 @@ def add_GeneroNomePreditorServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'PreverGeneroNome': grpc.unary_unary_rpc_method_handler(
                     servicer.PreverGeneroNome,
-                    request_deserializer=grpc_dot_genero__nome__pb2.GeneroNomeRequest.FromString,
-                    response_serializer=grpc_dot_genero__nome__pb2.GeneroNomeReply.SerializeToString,
+                    request_deserializer=genero__nome__pb2.GeneroNomeRequest.FromString,
+                    response_serializer=genero__nome__pb2.GeneroNomeReply.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -60,7 +60,7 @@ class GeneroNomePreditor(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/generonome.GeneroNomePreditor/PreverGeneroNome',
-            grpc_dot_genero__nome__pb2.GeneroNomeRequest.SerializeToString,
-            grpc_dot_genero__nome__pb2.GeneroNomeReply.FromString,
+            genero__nome__pb2.GeneroNomeRequest.SerializeToString,
+            genero__nome__pb2.GeneroNomeReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
