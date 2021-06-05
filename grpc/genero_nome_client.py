@@ -1,4 +1,4 @@
-from __future__ import print_function
+#from __future__ import print_function
 #import logging
 
 import grpc
@@ -18,7 +18,16 @@ def run(host, port, nome_pessoa):
 	)
 
 	response = stub.PreverGeneroNome(request)
-	print("Gênero: " + str(response.genero))
+	tipo = response.genero
+	
+	if tipo == 0:
+		gen = 'FEMININO'
+	elif tipo == 1:
+		gen = 'MASCULINO'
+	else:
+		gen = ''
+
+	print("Gênero: " + gen)
 
 if __name__ == '__main__':
 #	logging.basicConfig()
