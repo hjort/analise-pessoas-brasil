@@ -3,19 +3,27 @@
 
 import grpc
 import argparse
+from pprint import pprint
 
 import genero_nome_pb2
 import genero_nome_pb2_grpc
 
-import genero_nome_server
+#import genero_nome_server
 
 def run(host, port, nome_pessoa):
+	print('run(host=%s, port=%s, nome_pessoa=%s)' % (host, port, nome_pessoa))
 
-	stub = genero_nome_server.GeneroNomePreditor()
+	channel = grpc.insecure_channel("%s:%d" % (host, port))
+	print('channel:', channel)
+
+	stub = genero_nome_pb2_grpc.GeneroNomePreditorStub(channel)
+	#stub = genero_nome_server.GeneroNomePreditor()
+	print('stub:', stub)
 
 	request = genero_nome_pb2.GeneroNomeRequest(
 		nome = nome_pessoa
 	)
+	print('request:', request)
 
 	response = stub.PreverGeneroNome(request)
 	tipo = response.genero
