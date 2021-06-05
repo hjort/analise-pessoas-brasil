@@ -26,16 +26,16 @@ class GeneroNomePreditor(genero_nome_pb2_grpc.GeneroNomePreditorServicer):
 
 	@classmethod
 	def obter_modelo(cls):
-		print('obter_modelo()')
-		pprint(cls._modelo)
+		#print('obter_modelo()')
+		#pprint(cls._modelo)
 		if cls._modelo is None:
 			caminho = path.join(path.dirname(path.abspath(__file__)), MODELO_TREINADO)
-			print("caminho:", caminho)
+			print("Carregando modelo treinado:", caminho)
 			cls._modelo = joblib.load(caminho)
 		return cls._modelo
 
-	def PreverGeneroNome(self, request):
-		print('PreverGeneroNome()')
+	def PreverGeneroNome(self, request, context):
+		#print('PreverGeneroNome()')
 		modelo = self.__class__.obter_modelo()
 
 		#pprint(self)
@@ -43,7 +43,7 @@ class GeneroNomePreditor(genero_nome_pb2_grpc.GeneroNomePreditorServicer):
 		#print(type(request))
 		#pprint(request.nome)
 		nome_pessoa = request.nome
-		print('=> nome:', nome_pessoa)
+		print('=> nome  :', nome_pessoa)
 
 		# extrair primeiro nome e obter array de letras invertido
 		anome = self.obter_array_letras(self.obter_primeiro_nome(nome_pessoa))
@@ -54,13 +54,13 @@ class GeneroNomePreditor(genero_nome_pb2_grpc.GeneroNomePreditorServicer):
 		else:
 			tipo = None
 
-		'''if tipo == 0:
+		if tipo == 0:
 			gen = 'FEMININO'
 		elif tipo == 1:
 			gen = 'MASCULINO'
 		else:
 			gen = ''
-		print(' > genero:', gen)'''
+		print('   genero:', gen)
 
 		return genero_nome_pb2.GeneroNomeReply(genero=tipo)
 
@@ -80,7 +80,7 @@ class GeneroNomePreditor(genero_nome_pb2_grpc.GeneroNomePreditorServicer):
 
 
 def serve():
-	print('serve()')
+	print('Iniciando serviço gRPC...\n')
 	server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
 	genero_nome_pb2_grpc.add_GeneroNomePreditorServicer_to_server(GeneroNomePreditor(), server)
 	server.add_insecure_port('[::]:50052')

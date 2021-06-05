@@ -11,19 +11,19 @@ import genero_nome_pb2_grpc
 #import genero_nome_server
 
 def run(host, port, nome_pessoa):
-	print('run(host=%s, port=%s, nome_pessoa=%s)' % (host, port, nome_pessoa))
+	#print('run(host=%s, port=%s, nome_pessoa=%s)' % (host, port, nome_pessoa))
 
 	channel = grpc.insecure_channel("%s:%d" % (host, port))
-	print('channel:', channel)
+	#print('channel:', channel)
 
 	stub = genero_nome_pb2_grpc.GeneroNomePreditorStub(channel)
 	#stub = genero_nome_server.GeneroNomePreditor()
-	print('stub:', stub)
+	#print('stub:', stub)
 
 	request = genero_nome_pb2.GeneroNomeRequest(
 		nome = nome_pessoa
 	)
-	print('request:', request)
+	#print('request:', request)
 
 	response = stub.PreverGeneroNome(request)
 	tipo = response.genero
@@ -35,7 +35,7 @@ def run(host, port, nome_pessoa):
 	else:
 		gen = ''
 
-	print("Gênero: " + gen)
+	print("Nome: %s => Gênero: %s" % (nome_pessoa, gen))
 
 if __name__ == '__main__':
 #	logging.basicConfig()

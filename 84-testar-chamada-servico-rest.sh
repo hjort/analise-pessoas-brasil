@@ -1,4 +1,5 @@
-NOMES="Maria Joao SOCORRO JOSE Leonor Djalma Esther JURACY Domingas ATILA"
+# nomes de pessoas para testar chamadas
+NOMES="Maria Joao SOCORRO JOSE Leonor Djalma Esther JURACY Domingas ATILA Conceicao"
 
 for nome in $NOMES
 do
