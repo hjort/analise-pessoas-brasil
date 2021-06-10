@@ -8,13 +8,15 @@ COPY static/ /app/static/
 COPY templates/ /app/templates/
 COPY modelos/ /app/modelos/
 
-COPY docker/requirements-sklearn.txt /app/requirements.txt 
+COPY docker/requirements-appweb.txt /app/requirements.txt 
 COPY 81-aplicacao-servico-rest.py /app/app.py
 
 #COPY . /app
 #RUN mv /app/81-aplicacao-servico-rest.py /app/app.py
 
-RUN pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org -r requirements.txt
+RUN pip install \
+  --trusted-host pypi.org --trusted-host files.pythonhosted.org \
+  -r requirements.txt
 
 EXPOSE 5000
 
