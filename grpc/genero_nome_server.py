@@ -52,7 +52,7 @@ class GeneroNomePreditor(genero_nome_pb2_grpc.GeneroNomePreditorServicer):
 		if anome:
 			tipo = modelo.predict(np.asarray([anome]))[0]
 		else:
-			tipo = None
+			tipo = -1 #None
 
 		if tipo == 0:
 			gen = 'FEMININO'
@@ -66,7 +66,7 @@ class GeneroNomePreditor(genero_nome_pb2_grpc.GeneroNomePreditorServicer):
 
 	def obter_primeiro_nome(self, str):
 		if str:
-			return re.split("\s", str)[0].upper()
+			return re.split(r'\s', str)[0].upper()
 
 	def obter_array_letras(self, str):
 		if not str:

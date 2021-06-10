@@ -6,7 +6,7 @@ lsof -i :50052
 echo
 
 # nomes de pessoa para testar chamada
-NOMES="Maria Joao SOCORRO JOSE Leonor Djalma Esther JURACY Domingas ATILA Conceicao"
+NOMES="Maria Joao SOCORRO JOSE Leonor Djalma Esther JURACY Domingas ATILA Conceicao Valdir"
 
 for nome in $NOMES
 do
