@@ -1,0 +1,19 @@
+FROM python:3.8-slim
+
+RUN mkdir /service
+COPY grpc/*.* /service/grpc/
+COPY modelos/*.bz2 /service/modelos/
+
+WORKDIR /service
+
+COPY docker/requirements-grpc.txt /service/requirements.txt 
+
+RUN pip install \
+  --trusted-host pypi.org --trusted-host files.pythonhosted.org \
+  -r requirements.txt
+
+RUN python -m grpc_tools.protoc -I grpc/ --python_out=grpc/ \
+           --grpc_python_out=grpc/ grpc/genero_nome.proto
+
+EXPOSE 50052
+ENTRYPOINT [ "python", "grpc/genero_nome_server.py" ]
