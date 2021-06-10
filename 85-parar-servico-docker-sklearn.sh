@@ -1,5 +1,5 @@
-sudo docker ps
+docker ps
 
-sudo docker stop app-pessoas
+docker stop app-pessoas
 
-sudo docker ps
+docker ps

@@ -1,4 +1,3 @@
-sudo docker build -t app-pessoas  -f docker/dockerfile-sklearn.txt .
+docker build -t app-pessoas  -f docker/dockerfile-sklearn.txt .
 
-sudo docker images
-
+docker images
